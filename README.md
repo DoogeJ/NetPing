@@ -13,6 +13,12 @@ It's a great way to monitor a connection or host and gives feedback in an intuit
 **Interval:** This is the ping interval in ms (milliseconds)  
 **Display:** This is the amount of pings to display in the graph
 
+# Installing
+Get the latest release here: [https://github.com/DoogeJ/NetPing/releases](https://github.com/DoogeJ/NetPing/releases).
+
+## Reporting bugs or feature requests
+Please use the GitHub issue-system for bugs or feature requests: [https://github.com/DoogeJ/NetPing/issues](https://github.com/DoogeJ/NetPing/issues).
+
 # Development
 This section is focussed on development of NetPing, in case you want to build your own version(s).
 
