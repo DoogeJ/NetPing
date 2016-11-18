@@ -36,6 +36,7 @@ namespace NetPing
 
         public void startPing(string who, int TTL = 64, int timeout = 1000)
         {
+            criticalErrorShown = false;
             if (Uri.CheckHostName(who) == UriHostNameType.Unknown)
             {
                 MessageBox.Show("This is not a valid host: " + who, "NetPing Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
