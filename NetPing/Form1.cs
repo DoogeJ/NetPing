@@ -15,6 +15,8 @@ namespace NetPing
         public int pingTimeout = 1000;
         public int display = 120;
 
+        bool criticalErrorShown = false;
+
         public frmNetPing()
         {
             InitializeComponent();
@@ -25,7 +27,8 @@ namespace NetPing
             if (timer1.Enabled)
             {
                 stopPing();
-            }else
+            }
+            else
             {
                 startPing(txtPingTarget.Text);
             }
@@ -73,7 +76,7 @@ namespace NetPing
 
         public void addItem(double ping, bool timeout = false)
         {
-            
+
             Series s = pingChart.Series["srPing"];
             double nextX = 1;
 
@@ -91,8 +94,8 @@ namespace NetPing
             }
 
             s.Points.Add(x);
-            
-            if(s.Points.Count > display)
+
+            if (s.Points.Count > display)
             {
                 s.Points.Remove(s.Points[0]);
                 pingChart.ResetAutoValues();
@@ -123,14 +126,23 @@ namespace NetPing
         {
             if (e.Cancelled)
             {
-                MessageBox.Show("Ping canceled");
                 stopPing();
+                if (!criticalErrorShown)
+                {
+                    MessageBox.Show("Ping canceled");
+                }
+                criticalErrorShown = true;
             }
-            
+
             if (e.Error != null)
             {
-                MessageBox.Show("Ping failed: " + Environment.NewLine + e.Error.ToString(), "NetPing Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 stopPing();
+                //this makes sure that critical errors only get shown once, to avoid getting an error of every outstanding call when a connection drops
+                if (!criticalErrorShown)
+                {
+                    MessageBox.Show("Ping failed: " + Environment.NewLine + e.Error.ToString(), "NetPing Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                criticalErrorShown = true;
             }
 
             PingReply reply = e.Reply;
@@ -153,12 +165,20 @@ namespace NetPing
                     break;
 
                 case IPStatus.BadDestination:
-                    MessageBox.Show("This is not a valid host!", "NetPing Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     stopPing();
+                    if (!criticalErrorShown)
+                    {
+                        MessageBox.Show("This is not a valid host!", "NetPing Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    criticalErrorShown = true;
                     break;
                 case IPStatus.BadRoute:
-                    MessageBox.Show("No route to host was found!", "NetPing Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     stopPing();
+                    if (!criticalErrorShown)
+                    {
+                        MessageBox.Show("No route to host was found!", "NetPing Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    criticalErrorShown = true;
                     break;
 
                 default: //assume timeout
@@ -188,7 +208,8 @@ namespace NetPing
                 txtPingTarget.Text = "";
                 txtInterval.Text = "1000";
                 txtTimeout.Text = "1000";
-            }else
+            }
+            else
             {
                 stopPing();
             }
@@ -218,7 +239,7 @@ namespace NetPing
         private void txtInterval_TextChanged(object sender, EventArgs e)
         {
             Int32 a;
-            if(!Int32.TryParse(txtInterval.Text, out a))
+            if (!Int32.TryParse(txtInterval.Text, out a))
             {
                 txtInterval.Text = "1000";
             }
