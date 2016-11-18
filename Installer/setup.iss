@@ -24,6 +24,8 @@ OutputBaseFilename=Install_{#MyAppName}_{#MyAppVersion}
 SetupIconFile=..\1476172268_electronics-20.ico
 Compression=lzma
 SolidCompression=yes
+UsePreviousGroup=no
+UsePreviousAppDir=no  
 
 ; we will need administrator privileges to copy to program files and / or install prerequirements
 PrivilegesRequired=admin
