@@ -1,7 +1,7 @@
 #define use_dotnetfx46
 
 #define MyAppName "NetPing"
-#define MyAppVersion "1.0.0.0"
+#define MyAppVersion "1.0.1.0"
 #define MyAppPublisher "DoogeJ"
 #define MyAppURL "https://github.com/DoogeJ/NetPing"
 #define MyAppExeName "NetPing.exe"
