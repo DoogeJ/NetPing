@@ -29,6 +29,7 @@ It will most likely build fine on different configurations, but might require so
 ## Updating the version number
 The version number is stored in two locations:
 * In the projects assembly info file: **'NetPing\Properties\AssemblyInfo.cs'**
+* In the projects C# project file: **'NetPing\NetPing.csproj'** 
 * In the installer setup.iss file (only used for the installer): **'Installer\setup.iss'**
 
 ## Building the installer
