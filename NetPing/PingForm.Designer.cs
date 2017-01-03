@@ -1,6 +1,6 @@
 ﻿namespace NetPing
 {
-    partial class frmNetPing
+    partial class PingForm
     {
         /// <summary>
         /// Required designer variable.
@@ -28,15 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.LegendItem legendItem1 = new System.Windows.Forms.DataVisualization.Charting.LegendItem();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmNetPing));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PingForm));
             this.pingChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.btnActivate = new System.Windows.Forms.Button();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.txtPingTarget = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -48,6 +45,8 @@
             this.btnReset = new System.Windows.Forms.Button();
             this.txtDisplay = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
+            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pingChart)).BeginInit();
             this.SuspendLayout();
             // 
@@ -110,21 +109,11 @@
             legend1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             legend1.Name = "Legend1";
             this.pingChart.Legends.Add(legend1);
-            this.pingChart.Location = new System.Drawing.Point(9, 31);
+            this.pingChart.Location = new System.Drawing.Point(9, 105);
             this.pingChart.Margin = new System.Windows.Forms.Padding(0);
             this.pingChart.Name = "pingChart";
             this.pingChart.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.None;
-            series1.BorderWidth = 2;
-            series1.ChartArea = "ChartArea1";
-            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
-            series1.EmptyPointStyle.BorderDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dash;
-            series1.EmptyPointStyle.Color = System.Drawing.Color.Red;
-            series1.EmptyPointStyle.LegendText = "Timeout";
-            series1.Legend = "Legend1";
-            series1.LegendText = "Ping";
-            series1.Name = "srPing";
-            this.pingChart.Series.Add(series1);
-            this.pingChart.Size = new System.Drawing.Size(854, 348);
+            this.pingChart.Size = new System.Drawing.Size(854, 246);
             this.pingChart.TabIndex = 0;
             this.pingChart.Text = "Ping reply";
             // 
@@ -144,10 +133,6 @@
             this.btnActivate.Text = "Start";
             this.btnActivate.UseVisualStyleBackColor = false;
             this.btnActivate.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // timer1
-            // 
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // txtPingTarget
             // 
@@ -337,12 +322,41 @@
             this.label5.TabIndex = 11;
             this.label5.Text = "Display:";
             // 
-            // frmNetPing
+            // listBox1
+            // 
+            this.listBox1.BackColor = System.Drawing.Color.Black;
+            this.listBox1.ForeColor = System.Drawing.Color.White;
+            this.listBox1.FormattingEnabled = true;
+            this.listBox1.Location = new System.Drawing.Point(9, 33);
+            this.listBox1.Name = "listBox1";
+            this.listBox1.Size = new System.Drawing.Size(798, 69);
+            this.listBox1.TabIndex = 13;
+            // 
+            // button1
+            // 
+            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.button1.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.button1.FlatAppearance.BorderSize = 0;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.button1.Location = new System.Drawing.Point(813, 34);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(50, 68);
+            this.button1.TabIndex = 14;
+            this.button1.Text = "Stop";
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            // 
+            // PingForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
-            this.ClientSize = new System.Drawing.Size(872, 388);
+            this.ClientSize = new System.Drawing.Size(872, 360);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.listBox1);
             this.Controls.Add(this.txtDisplay);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.btnReset);
@@ -358,7 +372,7 @@
             this.Controls.Add(this.pingChart);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(640, 320);
-            this.Name = "frmNetPing";
+            this.Name = "PingForm";
             this.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "NetPing";
@@ -372,7 +386,6 @@
 
         private System.Windows.Forms.DataVisualization.Charting.Chart pingChart;
         private System.Windows.Forms.Button btnActivate;
-        private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.TextBox txtPingTarget;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
@@ -384,6 +397,8 @@
         private System.Windows.Forms.Button btnReset;
         private System.Windows.Forms.TextBox txtDisplay;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.Button button1;
     }
 }
 
