@@ -22,19 +22,19 @@ namespace NetPing
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void StartStopClicked(object sender, EventArgs e)
         {
             if (timer1.Enabled)
             {
-                stopPing();
+                StopPing();
             }
             else
             {
-                startPing(txtPingTarget.Text);
+                StartPing(txtPingTarget.Text);
             }
         }
 
-        public void startPing(string who, int TTL = 64, int timeout = 1000)
+        public void StartPing(string who)
         {
             criticalErrorShown = false;
             if (Uri.CheckHostName(who) == UriHostNameType.Unknown)
@@ -63,7 +63,7 @@ namespace NetPing
             txtDisplay.Enabled = false;
         }
 
-        public void stopPing()
+        public void StopPing()
         {
             this.Text = "NetPing";
             timer1.Enabled = false;
@@ -75,7 +75,7 @@ namespace NetPing
             txtDisplay.Enabled = true;
         }
 
-        public void addItem(double ping, bool timeout = false)
+        public void AddItem(double ping, bool timeout = false)
         {
 
             Series s = pingChart.Series["srPing"];
@@ -86,8 +86,10 @@ namespace NetPing
                 nextX = s.Points.Last().XValue + 1;
             }
 
-            DataPoint x = new DataPoint();
-            x.XValue = nextX;
+            DataPoint x = new DataPoint
+            {
+                XValue = nextX
+            };
             x.YValues[0] = ping;
             if (timeout)
             {
@@ -103,12 +105,12 @@ namespace NetPing
             }
         }
 
-        private void timer1_Tick(object sender, EventArgs e)
+        private void TimerTick(object sender, EventArgs e)
         {
-            sendPing(pingHost, pingTTL, pingTimeout);
+            SendPing(pingHost, pingTTL, pingTimeout);
         }
 
-        public void sendPing(string who, int TTL = 64, int timeout = 1000)
+        public void SendPing(string who, int TTL = 64, int timeout = 1000)
         {
             AutoResetEvent waiter = new AutoResetEvent(false);
             Ping pingSender = new Ping();
@@ -127,7 +129,7 @@ namespace NetPing
         {
             if (e.Cancelled)
             {
-                stopPing();
+                StopPing();
                 if (!criticalErrorShown)
                 {
                     MessageBox.Show("Ping canceled");
@@ -137,7 +139,7 @@ namespace NetPing
 
             if (e.Error != null)
             {
-                stopPing();
+                StopPing();
                 //this makes sure that critical errors only get shown once, to avoid getting an error of every outstanding call when a connection drops
                 if (!criticalErrorShown)
                 {
@@ -155,18 +157,18 @@ namespace NetPing
         {
             if (reply == null)
             {
-                addItem(0, true);
+                AddItem(0, true);
                 return;
             }
 
             switch (reply.Status)
             {
                 case IPStatus.Success:
-                    addItem(reply.RoundtripTime);
+                    AddItem(reply.RoundtripTime);
                     break;
 
                 case IPStatus.BadDestination:
-                    stopPing();
+                    StopPing();
                     if (!criticalErrorShown)
                     {
                         MessageBox.Show("This is not a valid host!", "NetPing Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -174,7 +176,7 @@ namespace NetPing
                     criticalErrorShown = true;
                     break;
                 case IPStatus.BadRoute:
-                    stopPing();
+                    StopPing();
                     if (!criticalErrorShown)
                     {
                         MessageBox.Show("No route to host was found!", "NetPing Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -183,7 +185,7 @@ namespace NetPing
                     break;
 
                 default: //assume timeout
-                    addItem(0, true);
+                    AddItem(0, true);
                     break;
 
             }
@@ -201,7 +203,7 @@ namespace NetPing
             */
         }
 
-        private void btnReset_Click(object sender, EventArgs e)
+        private void ResetClicked(object sender, EventArgs e)
         {
             if (timer1.Enabled == false)
             {
@@ -212,44 +214,40 @@ namespace NetPing
             }
             else
             {
-                stopPing();
+                StopPing();
             }
 
             Series s = pingChart.Series["srPing"];
             s.Points.Clear();
         }
 
-        private void txtTTL_TextChanged(object sender, EventArgs e)
+        private void TTLChanged(object sender, EventArgs e)
         {
-            Int32 a;
-            if (!Int32.TryParse(txtTTL.Text, out a))
+            if (!Int32.TryParse(txtTTL.Text, out _))
             {
                 txtTTL.Text = "64";
             }
         }
 
-        private void txtTimeout_TextChanged(object sender, EventArgs e)
+        private void TimeoutChanged(object sender, EventArgs e)
         {
-            Int32 a;
-            if (!Int32.TryParse(txtTimeout.Text, out a))
+            if (!Int32.TryParse(txtTimeout.Text, out _))
             {
                 txtTimeout.Text = "1000";
             }
         }
 
-        private void txtInterval_TextChanged(object sender, EventArgs e)
+        private void IntervalChanged(object sender, EventArgs e)
         {
-            Int32 a;
-            if (!Int32.TryParse(txtInterval.Text, out a))
+            if (!Int32.TryParse(txtInterval.Text, out _))
             {
                 txtInterval.Text = "1000";
             }
         }
 
-        private void txtDisplay_TextChanged(object sender, EventArgs e)
+        private void DisplayChanged(object sender, EventArgs e)
         {
-            Int32 a;
-            if (!Int32.TryParse(txtDisplay.Text, out a))
+            if (!Int32.TryParse(txtDisplay.Text, out _))
             {
                 txtDisplay.Text = "120";
             }

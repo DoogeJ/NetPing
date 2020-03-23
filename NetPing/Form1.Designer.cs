@@ -143,11 +143,11 @@
             this.btnActivate.TabIndex = 1;
             this.btnActivate.Text = "Start";
             this.btnActivate.UseVisualStyleBackColor = false;
-            this.btnActivate.Click += new System.EventHandler(this.button1_Click);
+            this.btnActivate.Click += new System.EventHandler(this.StartStopClicked);
             // 
             // timer1
             // 
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            this.timer1.Tick += new System.EventHandler(this.TimerTick);
             // 
             // txtPingTarget
             // 
@@ -210,7 +210,7 @@
             this.txtTTL.Size = new System.Drawing.Size(22, 21);
             this.txtTTL.TabIndex = 5;
             this.txtTTL.Text = "64";
-            this.txtTTL.TextChanged += new System.EventHandler(this.txtTTL_TextChanged);
+            this.txtTTL.TextChanged += new System.EventHandler(this.TTLChanged);
             // 
             // label3
             // 
@@ -246,7 +246,7 @@
             this.txtTimeout.Size = new System.Drawing.Size(34, 21);
             this.txtTimeout.TabIndex = 7;
             this.txtTimeout.Text = "1000";
-            this.txtTimeout.TextChanged += new System.EventHandler(this.txtTimeout_TextChanged);
+            this.txtTimeout.TextChanged += new System.EventHandler(this.TimeoutChanged);
             // 
             // label4
             // 
@@ -282,7 +282,7 @@
             this.txtInterval.Size = new System.Drawing.Size(34, 21);
             this.txtInterval.TabIndex = 9;
             this.txtInterval.Text = "1000";
-            this.txtInterval.TextChanged += new System.EventHandler(this.txtInterval_TextChanged);
+            this.txtInterval.TextChanged += new System.EventHandler(this.IntervalChanged);
             // 
             // btnReset
             // 
@@ -299,7 +299,7 @@
             this.btnReset.TabIndex = 10;
             this.btnReset.Text = "Reset";
             this.btnReset.UseVisualStyleBackColor = false;
-            this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
+            this.btnReset.Click += new System.EventHandler(this.ResetClicked);
             // 
             // txtDisplay
             // 
@@ -322,7 +322,7 @@
             this.txtDisplay.Size = new System.Drawing.Size(34, 21);
             this.txtDisplay.TabIndex = 12;
             this.txtDisplay.Text = "120";
-            this.txtDisplay.TextChanged += new System.EventHandler(this.txtDisplay_TextChanged);
+            this.txtDisplay.TextChanged += new System.EventHandler(this.DisplayChanged);
             // 
             // label5
             // 
