@@ -48,6 +48,7 @@ namespace NetPing
                 MessageBox.Show("This is not a valid host!", "NetPing Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+
             pingHost = who;
             this.Text = "NetPing - " + who;
             pingTTL = Convert.ToInt32(txtTTL.Text);
@@ -132,9 +133,9 @@ namespace NetPing
                 StopPing();
                 if (!criticalErrorShown)
                 {
+                    criticalErrorShown = true;
                     MessageBox.Show("Ping canceled");
                 }
-                criticalErrorShown = true;
             }
 
             if (e.Error != null)
@@ -143,9 +144,9 @@ namespace NetPing
                 //this makes sure that critical errors only get shown once, to avoid getting an error of every outstanding call when a connection drops
                 if (!criticalErrorShown)
                 {
+                    criticalErrorShown = true;
                     MessageBox.Show("Ping failed: " + Environment.NewLine + e.Error.ToString(), "NetPing Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-                criticalErrorShown = true;
             }
 
             PingReply reply = e.Reply;
