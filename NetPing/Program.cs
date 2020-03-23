@@ -13,7 +13,7 @@ namespace NetPing
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmNetPing());
+            Application.Run(new FrmNetPing());
         }
     }
 }

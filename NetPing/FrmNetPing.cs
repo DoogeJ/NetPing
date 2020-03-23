@@ -8,7 +8,7 @@ using System.Threading;
 
 namespace NetPing
 {
-    public partial class frmNetPing : Form
+    public partial class FrmNetPing : Form
     {
         public string pingHost;
         public int pingTTL = 64;
@@ -17,7 +17,7 @@ namespace NetPing
 
         bool criticalErrorShown = false;
 
-        public frmNetPing()
+        public FrmNetPing()
         {
             InitializeComponent();
         }
